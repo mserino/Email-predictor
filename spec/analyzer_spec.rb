@@ -77,4 +77,39 @@ describe Analyzer do
  		end
  	end
 
+ 	context 'converting from pattern to email' do
+ 		it 'from first_name_dot_last_name' do
+ 			expect(analyzer.to_email('John Ferguson', :first_name_dot_last_name)).to eq 'john.ferguson'
+ 		end
+
+ 		it 'from first_initial_dot_last_name' do
+ 			expect(analyzer.to_email('Harry Potter', :first_initial_dot_last_name)).to eq 'h.potter'
+ 		end
+
+ 		it 'from first_name_dot_last_initial' do
+ 			expect(analyzer.to_email('Margherita Serino', :first_name_dot_last_initial)).to eq 'margherita.s'
+ 		end
+
+ 		it 'from first_initial_dot_last_initial' do
+ 			expect(analyzer.to_email('Damon Lindeloff', :first_initial_dot_last_initial)).to eq 'd.l'
+ 		end
+ 	end
+
+ 	# context 'predicting email address' do
+ 	# 	let(:data) {
+ 	# 		{
+		#   "John Ferguson" => "john.ferguson@alphasights.com",
+		#   "Damon Aw" => "damon.aw@alphasights.com",
+		#   "Linda Li" => "linda.li@alphasights.com",
+		#   "Larry Page" => "larry.p@google.com",
+		#   "Sergey Brin" => "s.brin@google.com",
+		#   "Steve Jobs" => "s.j@apple.com"
+		# 	}
+ 	# 	}
+
+ 	# 	it 'with pattern first_name_dot_last_name' do
+ 	# 		expect(analyzer.predict('Harry Potter', 'alphasights.com')).to eq 'harry.potter@alphasights.com'
+ 	# 	end
+ 	# end
+
 end
