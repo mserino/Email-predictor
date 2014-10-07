@@ -21,9 +21,13 @@ class Analyzer
 	end
 
 	def match(company, data)
-		name = get(data.values[0]) # to get the first part of the name damon.aw
-		# pattern << convert(name) # first_name_dot_last_name
-		@pattern[company] = [convert(name)]
+		emails = data.values
+		pattern[company] = []
+		emails.map do |email|
+			name = get(email)
+			pattern[company] << convert(name) if email.include? company
+		end
+		pattern[company].uniq!
 	end
 
 	private

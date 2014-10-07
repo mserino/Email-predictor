@@ -53,21 +53,28 @@ describe Analyzer do
  			end
  		end
 
- 	# 	let(:data) {
- 	# 		{
-		#   "John Ferguson" => "john.ferguson@alphasights.com",
-		#   "Damon Aw" => "damon.aw@alphasights.com",
-		#   "Linda Li" => "linda.li@alphasights.com",
-		#   "Larry Page" => "larry.p@google.com",
-		#   "Sergey Brin" => "s.brin@google.com",
-		#   "Steve Jobs" => "s.j@apple.com"
-		# 	}
-		# }
+ 		context 'with a set of data' do
+	 		let(:data) {
+	 			{
+			  "John Ferguson" => "john.ferguson@alphasights.com",
+			  "Damon Aw" => "damon.aw@alphasights.com",
+			  "Linda Li" => "linda.li@alphasights.com",
+			  "Larry Page" => "larry.p@google.com",
+			  "Sergey Brin" => "s.brin@google.com",
+			  "Steve Jobs" => "s.j@apple.com"
+				}
+			}
 
-		# it 'can match the pattern for one company' do
-		# 	analyzer.match('alphasights.com', data)
-		# 	expect(analyzer.data['alphasights.com']).to eq [:first_name_dot_last_name, :first_name_dot_last_initial]
-		# end
+			it 'can match the patterns' do
+				analyzer.match('alphasights.com', data)
+				expect(analyzer.pattern['alphasights.com']).to eq [:first_name_dot_last_name]
+			end
+
+			it 'can match different patterns' do
+				analyzer.match('google.com', data)
+				expect(analyzer.pattern['google.com']).to eq [:first_name_dot_last_initial, :first_initial_dot_last_name]
+			end
+ 		end
  	end
 
 end
