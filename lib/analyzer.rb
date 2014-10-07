@@ -1,7 +1,13 @@
 class Analyzer
 
-	def get(email)
-		email.split('@')[0]
+	attr_accessor :pattern
+
+	def initialize
+		@pattern = {}
+	end
+
+	def get(name)
+		name.split('@')[0]
 	end
 
 	def find(string)
@@ -14,22 +20,20 @@ class Analyzer
 		find(string)
 	end
 
+	def match(company, data)
+		name = get(data.values[0]) # to get the first part of the name damon.aw
+		# pattern << convert(name) # first_name_dot_last_name
+		@pattern[company] = [convert(name)]
+	end
+
 	private
 
 	def name_pattern
-		if @name.length == 1
-			'first_initial'
-		else
-			'first_name'
-		end
+		@name.length == 1 ? 'first_initial' : 'first_name'
 	end
 
 	def lastname_pattern
-		if @lastname.length == 1
-			'last_initial'
-		else
-			'last_name'
-		end
+		@lastname.length == 1 ? 'last_initial' : 'last_name'
 	end
 
 end

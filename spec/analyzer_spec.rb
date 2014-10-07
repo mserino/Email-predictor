@@ -43,4 +43,31 @@ describe Analyzer do
 		end
  	end
 
+ 	context 'matching data' do
+ 		context 'with a single company' do
+ 			let(:data) { {'Damon Aw' => 'damon.aw@alphasights.com'}}
+
+ 			it 'can match the pattern for the company' do
+ 				analyzer.match('alphasights.com', data)
+ 				expect(analyzer.pattern['alphasights.com']).to eq [:first_name_dot_last_name]
+ 			end
+ 		end
+
+ 	# 	let(:data) {
+ 	# 		{
+		#   "John Ferguson" => "john.ferguson@alphasights.com",
+		#   "Damon Aw" => "damon.aw@alphasights.com",
+		#   "Linda Li" => "linda.li@alphasights.com",
+		#   "Larry Page" => "larry.p@google.com",
+		#   "Sergey Brin" => "s.brin@google.com",
+		#   "Steve Jobs" => "s.j@apple.com"
+		# 	}
+		# }
+
+		# it 'can match the pattern for one company' do
+		# 	analyzer.match('alphasights.com', data)
+		# 	expect(analyzer.data['alphasights.com']).to eq [:first_name_dot_last_name, :first_name_dot_last_initial]
+		# end
+ 	end
+
 end
