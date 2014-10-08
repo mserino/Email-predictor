@@ -39,22 +39,52 @@ class Interface
 
 	def predict_from_data		
 		begin
-			PEOPLE.map do |person|
-				puts "Press Enter to predict the email of #{person[:name]}, #{person[:company]}"
-				STDIN.gets.chomp
-				predictor = Predictor.new
-				predictor.predict(person[:name], person[:company])
-				if predictor.prediction.length == 1
-					puts "The email is: #{predictor.prediction[0]}"
-				else
-					puts "The emails are: "
-					predictor.prediction.map {|pred| puts pred}
-				end
-				STDIN.gets.chomp
-			end
+			predict_people
 		rescue InvalidEmailException
 			puts "Sorry, email not available"
 		end
+	end
+
+	def predict_people
+		PEOPLE.map do |person|
+			enter_to_predict(person)
+			@predictor = Predictor.new
+			predict(person)
+			if one_email
+				puts_single_email
+			else
+				puts_multiple_emails
+			end
+			press_enter
+		end
+	end
+
+	private
+
+	def predict(person)
+		@predictor.predict(person[:name], person[:company])
+	end
+
+	def enter_to_predict(person)
+		puts "Press Enter to predict the email of #{person[:name]}, #{person[:company]}"
+		press_enter
+	end
+
+	def one_email
+		@predictor.prediction.length == 1
+	end
+
+	def puts_single_email
+		puts "The email is: #{predictor.prediction[0]}"
+	end
+
+	def puts_multiple_emails
+		puts "The emails are: "
+		predictor.prediction.map {|pred| puts pred}
+	end
+
+	def press_enter
+		STDIN.gets.chomp
 	end
 
 end
