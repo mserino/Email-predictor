@@ -1,5 +1,6 @@
 require_relative 'analyzer'
 require_relative 'error'
+require_relative 'constants'
 
 class Predictor
 	attr_reader :analyzer, :prediction
@@ -17,10 +18,16 @@ class Predictor
 		end
 	end
 
+	def predict_people
+		PEOPLE.map do |person|
+			predict(person[:name], person[:company])
+		end
+	end
+
 	private
 
 	def check_for(company)
-		emails = Analyzer::DATA.values
+		emails = DATA.values
 		companies = emails.map {|email| email.split('@')[1]}.uniq
 		!companies.include? company
 	end

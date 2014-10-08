@@ -42,4 +42,10 @@ describe Predictor do
 			expect(predictor.instance_eval{ check_for('amazon.com') }).to eq true
 		end
 	end
+
+	context 'predict from a set of data' do
+		before do
+			predictor.predict_people
+		end
+	end
 end

@@ -40,4 +40,10 @@ describe Interface do
 		expect(STDOUT).to receive(:puts).with "j.snow@google.com"
 		interface.predict_email
 	end
+	
+	it 'asks the user if wants to check different email' do
+		expect(STDOUT).to receive(:puts).with "Press Enter if you want to predict a different email"
+		expect(STDIN).to receive(:gets).and_return " "
+		interface.keep_checking
+	end
 end
