@@ -7,6 +7,8 @@ class Interface
 
 	def welcome
 		puts "Welcome to the Email Predictor"
+		puts "Press Enter to continue"
+		press_enter
 	end
 
 	def enter_name
@@ -80,7 +82,7 @@ class Interface
 
 	def puts_multiple_emails
 		puts "The emails are: "
-		predictor.prediction.map {|pred| puts pred}
+		@predictor.prediction.map {|pred| puts pred}
 	end
 
 	def press_enter

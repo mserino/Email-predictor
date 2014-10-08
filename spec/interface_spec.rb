@@ -6,6 +6,8 @@ describe Interface do
 
 	it 'welcome message' do
 		expect(STDOUT).to receive(:puts).with "Welcome to the Email Predictor"
+		expect(STDOUT).to receive(:puts).with "Press Enter to continue"
+		expect(STDIN).to receive(:gets).and_return " "
 		interface.welcome
 	end
 

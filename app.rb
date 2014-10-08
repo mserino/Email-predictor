@@ -1,7 +1,7 @@
 require './lib/interface'
 
 interface = Interface.new
-
+interface.welcome
 interface.predict_from_data
 interface.keep_checking
 interface.enter_name
