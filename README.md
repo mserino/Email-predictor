@@ -20,6 +20,8 @@ Error to handle the situation in which the given email is not present in the dat
 
 `$ cd Email-predictor`
 
+`$ bundle install`
+
 *Run the app*
 
 `$ ruby app.rb`
