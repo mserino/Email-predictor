@@ -1,3 +1,5 @@
+require_relative 'error'
+
 class Analyzer
 
 	DATA = {
@@ -48,7 +50,7 @@ class Analyzer
 
 	def predict(name, company)
 		match(company)
-		return "The email cannot be predicted" if check_for(company)
+		raise InvalidEmailException if check_for(company)
 		pattern[company].map do |patt|
 			prediction << to_email(name, patt) + "@#{company}"
 		end

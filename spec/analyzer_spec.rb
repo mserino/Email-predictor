@@ -80,7 +80,6 @@ describe Analyzer do
  			it 'returns true if a company is not in the dataset' do
  				analyzer.match('amazon.com')
  				expect(analyzer.instance_eval{ check_for('amazon.com') }).to eq true
- 				
  			end
  		end
  	end
@@ -131,7 +130,7 @@ describe Analyzer do
  		end
 
  		it 'returns an error if the email is not in the dataset' do
- 			expect(analyzer.predict('Harry Potter', 'hogwarts.co.uk')).to eq 'The email cannot be predicted'
+ 			expect{analyzer.predict('Harry Potter', 'hogwarts.co.uk')}.to raise_exception InvalidEmailException
  		end
  	end
 
