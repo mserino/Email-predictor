@@ -6,13 +6,14 @@ class Analyzer
 	  "Linda Li" => "linda.li@alphasights.com",
 	  "Larry Page" => "larry.p@google.com",
 	  "Sergey Brin" => "s.brin@google.com",
-	  "Steve Jobs" => "s.j@apple.com"
+	  "Steve Jobs" => "s.j@apple.com",
 	}
 
-	attr_accessor :pattern
+	attr_accessor :pattern, :prediction
 
 	def initialize
 		@pattern = {}
+		@prediction ||= []
 	end
 
 	def get(name)
@@ -29,10 +30,10 @@ class Analyzer
 		find(string)
 	end
 
-	def match(company, data)
-		emails = data.values
+	def match(company)
+		@emails = DATA.values
 		pattern[company] ||= []
-		emails.map do |email|
+		@emails.map do |email|
 			name = get(email)
 			pattern[company] << convert(name) if email.include? company
 		end
@@ -46,15 +47,19 @@ class Analyzer
 	end
 
 	def predict(name, company)
-		@prediction ||= []
-		match(company, DATA)
+		match(company)
+		return "The email cannot be predicted" if check_for(company)
 		pattern[company].map do |patt|
-			@prediction << to_email(name, patt) + "@#{company}"
+			prediction << to_email(name, patt) + "@#{company}"
 		end
-		@prediction
 	end
 
 	private
+
+	def check_for(company)
+		companies = @emails.map {|email| email.split('@')[1]}.uniq
+		!companies.include? company
+	end
 
 	def name_pattern
 		@name.length == 1 ? 'first_initial' : 'first_name'
