@@ -18,12 +18,6 @@ class Predictor
 		end
 	end
 
-	def predict_people
-		PEOPLE.map do |person|
-			predict(person[:name], person[:company])
-		end
-	end
-
 	private
 
 	def check_for(company)
