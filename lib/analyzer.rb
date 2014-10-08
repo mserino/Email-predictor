@@ -11,11 +11,10 @@ class Analyzer
 	  "Steve Jobs" => "s.j@apple.com",
 	}
 
-	attr_accessor :pattern, :prediction
+	attr_accessor :pattern
 
 	def initialize
 		@pattern = {}
-		@prediction ||= []
 	end
 
 	def get(name)
@@ -33,9 +32,9 @@ class Analyzer
 	end
 
 	def match(company)
-		@emails = DATA.values
+		emails = DATA.values
 		pattern[company] ||= []
-		@emails.map do |email|
+		emails.map do |email|
 			name = get(email)
 			pattern[company] << convert(name) if email.include? company
 		end
@@ -48,20 +47,7 @@ class Analyzer
 		[first_part, last_part].join('.')
 	end
 
-	def predict(name, company)
-		match(company)
-		raise InvalidEmailException if check_for(company)
-		pattern[company].map do |patt|
-			prediction << to_email(name, patt) + "@#{company}"
-		end
-	end
-
 	private
-
-	def check_for(company)
-		companies = @emails.map {|email| email.split('@')[1]}.uniq
-		!companies.include? company
-	end
 
 	def name_pattern
 		@name.length == 1 ? 'first_initial' : 'first_name'

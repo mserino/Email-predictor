@@ -1,11 +1,11 @@
-require_relative 'analyzer'
+require_relative 'predictor'
 
 class Interface
 
-	attr_accessor :analyzer
+	attr_accessor :predictor
 
 	def initialize
-		@analyzer = Analyzer.new
+		@predictor = Predictor.new
 	end
 
 	def welcome
@@ -29,8 +29,8 @@ class Interface
 	end
 
 	def predict_email
-		analyzer.predict(@name, @company)
+		predictor.predict(@name, @company)
 		puts "The possible email are:"
-		analyzer.prediction.map {|pred| puts pred }
+		predictor.prediction.map {|pred| puts pred }
 	end
 end
