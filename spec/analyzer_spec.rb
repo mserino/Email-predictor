@@ -95,21 +95,21 @@ describe Analyzer do
  		end
  	end
 
- 	# context 'predicting email address' do
- 	# 	let(:data) {
- 	# 		{
-		#   "John Ferguson" => "john.ferguson@alphasights.com",
-		#   "Damon Aw" => "damon.aw@alphasights.com",
-		#   "Linda Li" => "linda.li@alphasights.com",
-		#   "Larry Page" => "larry.p@google.com",
-		#   "Sergey Brin" => "s.brin@google.com",
-		#   "Steve Jobs" => "s.j@apple.com"
-		# 	}
- 	# 	}
+ 	context 'predicting email address' do
+ 		let(:data) {
+ 			{
+		  "John Ferguson" => "john.ferguson@alphasights.com",
+		  "Damon Aw" => "damon.aw@alphasights.com",
+		  "Linda Li" => "linda.li@alphasights.com",
+		  "Larry Page" => "larry.p@google.com",
+		  "Sergey Brin" => "s.brin@google.com",
+		  "Steve Jobs" => "s.j@apple.com"
+			}
+ 		}
 
- 	# 	it 'with pattern first_name_dot_last_name' do
- 	# 		expect(analyzer.predict('Harry Potter', 'alphasights.com')).to eq 'harry.potter@alphasights.com'
- 	# 	end
- 	# end
+ 		it 'with pattern first_name_dot_last_name' do
+ 			expect(analyzer.predict('Harry Potter', 'alphasights.com')).to eq ['harry.potter@alphasights.com']
+ 		end
+ 	end
 
 end

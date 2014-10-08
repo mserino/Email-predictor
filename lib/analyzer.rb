@@ -45,9 +45,14 @@ class Analyzer
 		[first_part, last_part].join('.')
 	end
 
-	# def predict(name, company)
-	# 	match(company, DATA)
-	# end
+	def predict(name, company)
+		@prediction ||= []
+		match(company, DATA)
+		pattern[company].map do |patt|
+			@prediction << to_email(name, patt) + "@#{company}"
+		end
+		@prediction
+	end
 
 	private
 
